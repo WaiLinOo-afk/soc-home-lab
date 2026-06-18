@@ -86,11 +86,46 @@ earliest=0 index=wineventlog EventCode=4625
 
 ---
 
-## SOC Dashboard
+## Screenshots
 
-Built a Splunk Classic Dashboard with panels for each detection rule.
+### Splunk Setup
+| | |
+|---|---|
+| ![](screenshots/17-splunk-index-syslog.png) | ![](screenshots/18-splunk-index-sysmon.png) |
+| Index: syslog | Index: sysmon |
+| ![](screenshots/19-splunk-index-wineventlog.png) | ![](screenshots/12-soc-dashboard.png) |
+| Index: wineventlog | SOC Dashboard |
 
-![SOC Dashboard](screenshots/SOC%20Dashboard.png)
+### T1003.001 — LSASS Credential Dumping
+![](screenshots/01-T1003.001-lsass-dump-attempt.png)
+![](screenshots/02-T1003.001-lsass-dump-attempt-2.png)
+![](screenshots/21-T1003.001-splunk-sysmon-detection.png)
+
+### T1059.001 — PowerShell Execution
+![](screenshots/07-T1059.001-powershell-execution-1.png)
+![](screenshots/08-T1059.001-powershell-execution-2.png)
+![](screenshots/09-T1059.001-powershell-execution-3.png)
+![](screenshots/10-T1059.001-powershell-execution-4.png)
+
+### T1053.005 — Scheduled Task Persistence
+![](screenshots/05-T1053.005-scheduled-task-sim-1.png)
+![](screenshots/06-T1053.005-scheduled-task-sim-2.png)
+![](screenshots/04-T1053.005-scheduled-task-proof.png)
+![](screenshots/15-T1053.005-sysmon-detection.png)
+
+### T1021.002 — SMB Lateral Movement
+![](screenshots/03-T1021.002-smb-admin-share-access.png)
+![](screenshots/14-T1021.002-splunk-smb-detection.png)
+
+### T1046 — Network Recon (Kali)
+![](screenshots/20-T1046-nmap-scan-results.png)
+
+### T1110 — Brute Force (Kali + Hydra)
+![](screenshots/11-T1110-hydra-rdp-bruteforce.png)
+![](screenshots/13-T1110-splunk-detection-4625.png)
+
+### Windows Defender — Atomic Red Team Detections
+![](screenshots/16-windef-atomic-redteam-alerts.png)
 
 ---
 

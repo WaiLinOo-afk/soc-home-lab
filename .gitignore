@@ -1,0 +1,13 @@
+# ignore credentials or sensitive stuff
+*.key
+*.pem
+*.crt
+secrets.txt
+
+# OS stuff
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Splunk internal files
+*.license

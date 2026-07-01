@@ -14,17 +14,14 @@
 --   powershell.exe spawned by explorer.exe = needs investigation
 -- ============================================================
 
-earliest=0 index=sysmon _raw="1"
+earliest=0 index=sysmon _raw="*<EventID>1</EventID>*"
 | rex field=_raw "Name='Image'>(?<Image>[^<]+)"
 | rex field=_raw "Name='CommandLine'>(?<CommandLine>[^<]+)"
 | rex field=_raw "Name='ParentImage'>(?<ParentImage>[^<]+)"
-| rex field=_raw "Name='User'>(?<User>[^<]+)"
 | where like(lower(Image), "%powershell%")
 | where like(lower(CommandLine), "%-enc%")
   OR like(lower(CommandLine), "%-bypass%")
   OR like(lower(CommandLine), "%-nop%")
   OR like(lower(CommandLine), "%iex%")
-  OR like(lower(CommandLine), "%invoke-expression%")
-  OR like(lower(CommandLine), "%-windowstyle hidden%")
-| table _time, host, User, Image, CommandLine, ParentImage
+| table _time, host, Image, CommandLine, ParentImage
 | sort -_time

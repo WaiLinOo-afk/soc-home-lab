@@ -116,11 +116,6 @@ Navigate to **Settings → Forwarding and Receiving → Configure Receiving → 
 
 > ⚠️ **Note:** This port must be open on the Windows Firewall for Universal Forwarders to send data. If events stop arriving, verify this rule first.
 
-**Evidence:**
-
-![wineventlog index](screenshots/index%3Dwineventlog.png)
-![sysmon index](screenshots/index%3Dsysmon.png)
-![syslog index](screenshots/index%3Dsyslog.png)
 
 ---
 
@@ -232,6 +227,12 @@ index=sysmon | head 10
 
 Both queries should return events, confirming data is flowing.
 
+**Evidence:**
+
+![wineventlog index](screenshots/index%3Dwineventlog.png)
+![sysmon index](screenshots/index%3Dsysmon.png)
+
+
 ---
 
 ## Step 4 — Splunk Universal Forwarder (Kali Linux)
@@ -299,6 +300,8 @@ In Splunk:
 ```spl
 index=syslog | head 10
 ```
+**Evidence:**
+![syslog index](screenshots/index%3Dsyslog.png)
 
 Should return events from `host=kali`, confirming cross-VM log forwarding is working.
 
@@ -343,6 +346,7 @@ Common tools: Mimikatz, ProcDump, comsvcs.dll (`MiniDump`), pypykatz.
 Invoke-AtomicTest T1003.001
 ```
 
+
 **Result:** All sub-tests returned `Access Denied` — Windows Defender blocked execution of ProcDump, Mimikatz, comsvcs.dll, and pypykatz. However, the attempt itself was still logged by Sysmon EventID 1.
 
 > **Key insight:** Blocked attacks still leave forensic artifacts. Sysmon EventID 1 records every process creation attempt, including those that terminate immediately with an error. A defender who only tracks successful executions will miss the majority of real-world attack activity. Prevention ≠ invisibility.
@@ -362,8 +366,9 @@ earliest=0 index=sysmon _raw="lsass"
 
 **Evidence:**
 
-![T1003.001 Detection](screenshots/Splunk%20Sysmon%20Detection%20-%20T1003.001%20LSASS%20Memory%20Dump%20Attempt.png)
 ![T1003.001 Output](screenshots/T1003.001.png)
+![T1003.001 Detection](screenshots/Splunk%20Sysmon%20Detection%20-%20T1003.001%20LSASS%20Memory%20Dump%20Attempt.png)
+
 
 ---
 
@@ -401,8 +406,9 @@ earliest=0 index=sysmon _raw="1"
 
 **Evidence:**
 
-![T1059.001 Detection](screenshots/Splunk%20Sysmon%20Detection%20-%20T1059.001%20—%20PowerShell.png)
 ![T1059.001 Output](screenshots/T1059.001.png)
+![T1059.001 Detection](screenshots/Splunk%20Sysmon%20Detection%20-%20T1059.001%20—%20PowerShell.png)
+
 
 ---
 
@@ -449,8 +455,9 @@ Invoke-AtomicTest T1053.005 -Cleanup
 
 **Evidence:**
 
-![T1053.005 Detection](screenshots/Splunk%20Sysmon%20Detection%20-%20T1053.005%20—%20Scheduled%20Task%20Persistence.png)
 ![T1053.005 Tasks Created](screenshots/T1053.005%20(Calculator%2C%20Event%20Viewer%20launched).png)
+![T1053.005 Detection](screenshots/Splunk%20Sysmon%20Detection%20-%20T1053.005%20—%20Scheduled%20Task%20Persistence.png)
+
 
 ---
 

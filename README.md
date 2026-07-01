@@ -389,7 +389,7 @@ Invoke-AtomicTest T1059.001
 **Splunk Detection Query:**
 
 ```spl
-earliest=0 index=sysmon _raw="1"
+earliest=0 index=sysmon _raw="*<EventID>1</EventID>*"
 | rex field=_raw "Name='Image'>(?<Image>[^<]+)"
 | rex field=_raw "Name='CommandLine'>(?<CommandLine>[^<]+)"
 | rex field=_raw "Name='ParentImage'>(?<ParentImage>[^<]+)"
@@ -437,7 +437,7 @@ This is a known limitation on Windows 11 — the audit subcategory mapping appea
 **Splunk Detection Query:**
 
 ```spl
-earliest=0 index=sysmon _raw="1"
+earliest=0 index=sysmon _raw="*<EventID>1</EventID>*"
 | rex field=_raw "Name='Image'>(?<Image>[^<]+)"
 | rex field=_raw "Name='CommandLine'>(?<CommandLine>[^<]+)"
 | rex field=_raw "Name='User'>(?<User>[^<]+)"
